@@ -6,8 +6,10 @@ from src.api.main import app
 # Get the OpenAPI schema
 openapi_schema = app.openapi()
 
-# Write to file
-output_dir = "interfaces"
+# Ensure interfaces directory exists and write schema
+output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "..", "interfaces")
+# Normalize the path to the repo's interfaces dir at welcome_backend/interfaces
+output_dir = os.path.abspath(output_dir)
 os.makedirs(output_dir, exist_ok=True)
 output_path = os.path.join(output_dir, "openapi.json")
 
