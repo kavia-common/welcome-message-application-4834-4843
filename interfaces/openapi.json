@@ -1,0 +1,87 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Welcome Backend API",
+    "description": "FastAPI backend that serves a welcome message and basic health check.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health Check",
+        "description": "Basic health check endpoint.\n\nReturns:\n    Dict[str, str]: A simple JSON payload indicating service health.",
+        "operationId": "health_check__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Check  Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/welcome": {
+      "get": {
+        "tags": [
+          "Welcome"
+        ],
+        "summary": "Get Welcome Message",
+        "description": "Returns a JSON object containing the welcome greeting.",
+        "operationId": "get_welcome_message",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WelcomeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WelcomeResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "The welcome message to display."
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "WelcomeResponse",
+        "description": "Response model for welcome endpoint."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Endpoints for service health and readiness checks."
+    },
+    {
+      "name": "Welcome",
+      "description": "Endpoints that return welcome messages."
+    }
+  ]
+}
